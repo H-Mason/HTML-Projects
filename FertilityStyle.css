@@ -1,0 +1,112 @@
+body{
+        background-color:rgb(203, 250, 203);
+    }
+    
+.heading
+{
+    text-align: center;
+    color: lightcyan;
+    background-color: rgb(124, 184, 124);
+    text-shadow: 0px 0px 10px #666666;
+    height: 20%;
+    position: relative;
+    padding: 1px;
+    font-size: 6vw;
+    border:none; 
+	border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+}
+.heading2
+{
+    text-align: center;
+    color: rgb(224, 255, 243);
+    text-shadow: 0px 0px 10px #666666;
+    background-color: rgb(124, 184, 124);
+    height: 25%;
+    position: relative;
+    padding: 3px;
+    font-size: 9vw;
+    border:none; 
+	border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+}
+.mainButton
+{
+    text-align: center;
+    display: flex; 
+    justify-content: center;
+}
+.newCycle
+{
+    background-color: rgb(152, 218, 152);
+    border-radius:50%;
+    font-size: 5vw;
+    box-shadow:0px 0px 5px #666666 inset, 0px 0px 5px #666666;
+    width: 35vw;
+    height: 35vw;
+}
+.currentCycle
+{
+    background-color: rgb(152, 218, 152);
+    border-radius:50%;
+    font-size: 5vw;
+    box-shadow:0px 0px 5px #666666 inset, 0px 0px 5px #666666;
+    width: 35vw;
+    height: 35vw;
+}
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(203, 250, 203);
+    text-align: center;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+}
+.toMain {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}
+.toMain2 {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}
+.toMedDeets {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}
+.saveForm1 {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}
+.saveForm2 {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}
+.currentCycle2 {
+    border-radius:10px; 
+    box-shadow:0px 0px 5px #666666;
+    background-color: rgb(152, 218, 152);
+    height: 10vw;
+}

@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tip Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="DefaultStyle.css" title="defaultColor" id="defaultColor">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        let usePer = true;
+        let calcBefore = true;
+
+        function openSettings() {
+            document.getElementById("settingsMenu").style.width = "100%";
+        }
+       
+        function closeSettings() {
+            document.getElementById("settingsMenu").style.width = "0%";
+            if (document.forms["settings"]["calc"].value == "after") {
+                calcBefore = false;
+            }
+            else {
+                calcBefore = true;
+            }
+            if (document.forms["settings"]["tip"].value == "dollar") {
+                usePer = false;
+            }
+            else {
+                usePer = true;
+            }
+            if (usePer == false) {
+                var dollars = document.getElementById("yCTip");
+                dollars.placeholder = "0"              
+            }
+            else {
+                var dollars = document.getElementById("yCTip");
+                dollars.placeholder = "15%" 
+            }
+        } 
+        function getCheck() {
+            let check = parseFloat(document.getElementById("yCCheck").value);
+            if (check == '' || isNaN(check)) {
+                return 0;
+            }
+            else {
+                return check;
+            }
+        }
+        
+        function getTax() {
+            let tax = parseFloat(document.getElementById("yCTax").value);
+            if (tax == '' || isNaN(tax)) {
+                return 0;
+            }
+            else {
+                return tax;
+            }
+        }
+
+        function getPeople() {
+            let people = parseInt(document.getElementById("yCPeople").value);
+            if (people == '' || isNaN(people)) {
+                return 1;
+            }
+            else {
+                return people;
+            }
+        }
+
+        function detCalc() {
+            if (usePer == false) {
+                calculateDollar();
+            }
+            else {
+                calculatePercent();
+            }
+        }
+
+        function getTip() {
+            let pTip = parseFloat(document.getElementById("yCTip").value);
+            if (isNaN(pTip)) {
+                pTip = 15;
+            }
+            if (calcBefore == false) {
+                let tip = (pTip/100) * (getCheck() + getTax());
+                if (isNaN(tip)) {
+                    return .15;
+                }
+                else {
+                    return tip;
+                }
+            }
+            else {
+                let tip = (pTip/100) * getCheck();
+
+                if (isNaN(tip)) {
+                    return .15;
+                }
+                else {
+                    return tip;
+                }
+            }
+        }
+
+        function getTipDol() {
+            let dTip = parseFloat(document.getElementById("yCTip").value);
+            let perc = 0;
+            if (isNaN(dTip)) {
+                return 15;
+            }
+            else {
+                perc = dTip / getCheck();
+                return perc;
+            }
+        }
+        function getPercentage() {
+            let dTip = parseFloat(document.getElementById("yCTip").value);
+            let perc = 0;
+            if (isNaN(dTip)) {
+                return 15;
+            }
+            else {
+                if (calcBefore == false) {
+                    perc = dTip / (getCheck() + getTax());
+                    return perc;
+                }
+                else {
+                    perc = dTip / getCheck();
+                    return perc;
+                }
+            }
+        }
+
+        function demolish() {
+            document.getElementById("yCPeople").value = '';
+            document.getElementById("yCCheck").value = '';
+            document.getElementById("yCTax").value =  '';
+            document.getElementById("yCTip").value = '';
+            document.getElementById("cTip").innerHTML = "0";
+            document.getElementById("cTotal").innerHTML = "$0.00";
+            document.getElementById("cPerson").innerHTML = "$0.00";
+        }
+
+        function roundIt(x) {
+            x = Math.round((x*100)) / 100;
+            return x;
+        }
+
+        function calculatePercent() {
+            let check = roundIt(getCheck());
+            let tax = roundIt(getTax());
+            let people = roundIt(getPeople());
+            let tip = roundIt(getTip());
+            let totCheck = 0.00;
+            let totTip = 0.00;
+            let totPerson = 0.00;
+
+            totCheck = check + tax + tip;
+            totTip = tip;
+            totPerson = roundIt(totCheck/people);
+
+            document.getElementById("cTip").innerHTML = "$" + totTip.toFixed(2);
+            document.getElementById("cTotal").innerHTML = "$" + totCheck.toFixed(2);
+            document.getElementById("cPerson").innerHTML = "$" + totPerson.toFixed(2);
+        }
+        
+        function calculateDollar() {
+            let check = roundIt(getCheck());
+            let tax = roundIt(getTax());
+            let people = roundIt(getPeople());
+            let tip = roundIt(getTipDol());
+            let percentage = roundIt(getPercentage() * 100)
+            let totCheck = 0.00;
+            let totPerson = 0.00;
+
+            totCheck = check + tax + tip;
+            totPerson = roundIt(totCheck/people);
+
+            document.getElementById("cTip").innerHTML = percentage + "%";
+            document.getElementById("cTotal").innerHTML = "$" + totCheck.toFixed(2);
+            document.getElementById("cPerson").innerHTML = "$" + totPerson.toFixed(2);
+        }
+
+    </script>
+
+    <style>
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(240, 239, 239);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
+    .overlay-content {
+        position: relative;
+        top: 25%;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .overlay a {
+        padding: 8px;
+        text-decoration: none;
+        font-size: 36px;
+        display: block;
+        transition: 0.3s;
+    }
+    @media screen and (max-height: 450px) {
+        .overlay a {font-size: 20px}
+        .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+    <section id="heading">
+            <button class="btn" id="settings" style="float: right" onclick="openSettings()"><i class="fa fa-gear"></i></button>
+            <h1>Tip Calculator</h1>
+            
+    </section>
+    <br>
+    <section id="checkTotal">
+        <h1>Check Totals</h1>
+    </section>
+  
+    <section id="checkTotDetails">
+        <p><div id="cTip" style="float: right">$0.00</div>Your Tip:</p>
+        <p><div id="cTotal" style="float: right">$0.00</div>Your Check Total: </p>
+        <p><div id="cPerson" style="float: right">$0.00</div>Per Person: </p>
+    </section>
+    <br>
+    <section id="yourCheck">
+        <h1>Your Check</h1>
+    </section>
+
+    <section id="yourCheDetails">
+        <p><input type="number" id="yCPeople" style="float: right; width:20vw" placeholder="1" maxlength="2">Number of People: </p>
+        <p><input type="number" id="yCCheck" style="float: right; width:20vw" placeholder="0">Pre-Tax Amount: </p>
+        <p><input type="number" id="yCTax" style="float: right; width:20vw" placeholder="0">Tax (Dollar amount): </p>
+        <p><input type="number" id="yCTip" style="float: right; width:20vw" placeholder="15%" maxlength="3">Tip: </p>
+        
+    </section>
+    <button type="button" id="calculate" onclick="detCalc()" style="float: right">Calculate</button>
+    <button type="button" id="clear" onclick="demolish()">Clear all inputs</button>
+
+<div id="settingsMenu" class="overlay">
+    <div class="overlay-content">
+        <form name="settings">
+            <h2>Calculator Settings</h2>
+            <input type="radio" name="calc" value="before" checked> Calculate Before Tax<br>
+            <input type="radio" name="calc" value="after"> Calculate After Tax<br>
+            <h2>Tip Settings</h2>
+            <input type="radio" name="tip" value="percentage" checked> Enter Tip Percentage<br>
+            <input type="radio" name="tip" value="dollar"> Enter Tip Dollar Amount<br>
+            <br>
+            <input type="button" value="Save" onclick="closeSettings()">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

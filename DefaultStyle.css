@@ -1,0 +1,105 @@
+body{
+        background-color: rgb(240, 239, 239);
+    }
+    
+#heading
+{
+    text-align: center;
+    background-color:lightblue;
+    height: 20%;
+    position: relative;
+    padding: 1px;
+    font-size: 5vw;
+    border:none; 
+	border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+}
+#checkTotal
+{
+    text-align: center;
+    background-color:lightblue;
+    width: 75vw;
+    height: 15%;
+    margin: auto;
+    padding:5px;
+    font-size: 3.5vw; 
+    border:none; 
+    border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+}
+#yourCheck
+{
+    text-align: center;
+    background-color:lightblue;
+    width: 75vw;
+    height: 15%;
+    margin: auto;
+    padding: 5px;
+    font-size: 3.5vw; 
+    border:none; 
+    border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+}
+#checkTotDetails
+{
+    background-color: rgb(228, 228, 228);
+    position: relative;
+    padding: 3px;
+    font-size: 5vw;
+    border:none; 
+    border-radius:5px; 
+    box-shadow:0px 0px 5px #666666 inset;
+    text-indent: 15px;
+}
+#yourCheDetails
+{
+    background-color: rgb(228, 228, 228);
+    position: relative;
+    padding: 3px;
+    font-size: 5vw;
+    border:none; 
+    border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+    text-indent: 10px;
+}
+#clear
+{
+    background-color: rgb(168, 167, 167);
+    position:relative;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 5vw;
+    border:none; 
+	border-radius:5px; 
+    box-shadow:0px 0px 5px #666666 inset;
+    text-indent: 1px;
+    text-align: center; 
+}
+#calculate
+{
+    background-color: lightblue;
+    position: relative;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 5vw;
+    border:none; 
+    border-radius:5px; 
+	box-shadow:0px 0px 5px #666666 inset;
+    text-indent: 1px; 
+}
+#cTip
+{
+    padding-right: 3px;
+}
+#cTotal
+{
+    padding-right: 3px;
+}
+#cPerson
+{
+    padding-right: 3px;
+}
+#cYPeople
+{
+    padding-right: 3px;            
+}

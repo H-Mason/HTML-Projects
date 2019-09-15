@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MayBeBaby</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="FertilityStyle.css" title="defaultColor" id="defaultColor">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="main.js" type="module">
+    </script>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <section class="heading2">
+        <h1>MayBeBaby</h1>
+    </section>
+    <br><br>
+    <div class="mainButton">
+        <button type="button" class="currentCycle">Current Cycle</button>
+    </div>
+    <div class="mainButton">
+        <button type="button" class="newCycle">New Cycle</button>
+    </div>
+
+<div id="currentCycle" class="overlay">
+    <section class="heading">
+        <h1>MayBeBaby <br> Current Cycle</h1>
+    </section>
+    <div class="overlay-content" id="currentCycleData">
+        
+    </div>
+    <br>
+    <div>
+        <input type="button" value="Exit Current Cycle" class="toMain">
+        <input type="button" value="View Medication Details" class="toMedDeets"> <br><br>
+    </div>
+</div>
+<div id="newCyclePg1" class="overlay">
+        <section class="heading">
+            <h1>MayBeBaby <br> New Cycle</h1>
+        </section>
+    <div class="overlay-content">
+        <form name="newCyclePg1" id="firstForm">
+            <h2>Cycle Start Date</h2>
+            Enter the cycle start date: <input type="date" id="startDate"><br>
+            <h2>Cycle Type</h2>
+            <input type="radio" name="cycle" id="medTI" value="Medication & Timed Intercourse (Not Monitored)">Medication & Timed Intercourse (Not Monitored)<br>
+            <input type="radio" name="cycle" id="mMedTI" value="Medication & Timed Intercourse">Medication & Timed Intercourse (Monitored)<br>
+            <input type="radio" name="cycle" id="IUI" value="Intra-Uterine Insemination">Intra-Uterine Insemination<br>
+            <input type="radio" name="cycle" id="IVF" value="In-Vitro Fertilization">In-Vitro Fertilization<br>
+            <input type="radio" name="cycle" id="FET" value="Frozen Embryo Transfer">Frozen Embryo Transfer<br>
+            <h2>Medications</h2>
+            <div id="fullMedsList"></div>
+        </form>
+        <br>
+        <input type="button" value="Save and Continue" class="saveForm1"><br><br>
+    </div>
+</div>
+<div id="newCyclePg2" class="overlay">
+        <section class="heading">
+            <h1>MayBeBaby <br> New Cycle</h1>
+        </section>
+    <div class="overlay-content">
+        <form name="newCyclePg2">
+            <div id="enterUltrasound"></div>
+            <h2>Medication Start Date</h2>
+            <div id="newMedList1"></div>
+        </form>
+        <form name="newCyclePg2a">
+            <h2>Number of Days Taken</h2>
+            <div id="newMedList2"></div>
+        </form>
+        <input type="button" value="Save and Finish" class="saveForm2"><br><br>
+    </div>
+</div>
+
+<div id="medDeets" class="overlay">
+        <section class="heading">
+            <h1>MayBeBaby <br> Medication Details</h1>
+        </section>
+        <br>
+        <div class="overlay-content" id="allMedDeets">
+            *Please follow your doctor's instructions.
+        </div>
+        <br>
+        <div>
+            <input type="button" value="Back to Current Cycle" class="currentCycle2">
+            <input type="button" value="Back to Main" class="toMain2"> <br>
+        </div>
+</div>
+</body>
+</html>

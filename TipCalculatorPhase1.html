@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tip Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function getCheck() {
+            let check = parseFloat(document.getElementById("yCCheck").value);
+            if (check == '' || isNaN(check)) {
+                return 0;
+            }
+            else {
+                return check;
+            }
+        }
+
+        function getTax() {
+            let tax = parseFloat(document.getElementById("yCTax").value);
+            if (tax == '' || isNaN(tax)) {
+                return 0;
+            }
+            else {
+                return tax;
+            }
+        }
+
+        function getPeople() {
+            let people = parseInt(document.getElementById("yCPeople").value);
+            if (people == '' || isNaN(people)) {
+                return 1;
+            }
+            else {
+                return people;
+            }
+        }
+
+        function getTip() {
+            let pTip = parseFloat(document.getElementById("yCPercentage").value);
+            if (isNaN(pTip)) {
+                pTip = 15;
+            }
+
+            let tip = (pTip/100) * getCheck();
+
+            if (isNaN(tip)) {
+                return .15;
+            }
+            else {
+                return tip;
+            }
+        }
+
+        function demolish() {
+            document.getElementById("yCPeople").value = '';
+            document.getElementById("yCCheck").value = '';
+            document.getElementById("yCTax").value =  '';
+            document.getElementById("yCPercentage").value = '';
+            document.getElementById("cTip").innerHTML = "$0.00";
+            document.getElementById("cTotal").innerHTML = "$0.00";
+            document.getElementById("cPerson").innerHTML = "$0.00";
+        }
+
+        function roundIt(x) {
+            x = Math.round((x*100)) / 100;
+            return x;
+        }
+
+        function calculate() {
+            let check = roundIt(getCheck());
+            let tax = roundIt(getTax());
+            let people = roundIt(getPeople());
+            let tip = roundIt(getTip());
+            let totCheck = 0.00;
+            let totTip = 0.00;
+            let totPerson = 0.00;
+
+            totCheck = check + tax + tip;
+            totTip = tip;
+            totPerson = roundIt(totCheck/people);
+
+            document.getElementById("cTip").innerHTML = "$" + totTip.toFixed(2);
+            document.getElementById("cTotal").innerHTML = "$" + totCheck.toFixed(2);
+            document.getElementById("cPerson").innerHTML = "$" + totPerson.toFixed(2);
+        }
+    </script>
+
+    <style>
+        body{
+            background-color: rgb(240, 239, 239);
+        }
+        #heading
+        {
+            text-align: center;
+            background-color:lightblue;
+            height: 20%;
+            position: relative;
+            padding: 1px;
+            font-size: 5vw;
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+        }
+        #checkTotal
+        {
+            text-align: center;
+            background-color:lightblue;
+            width: 75vw;
+            height: 15%;
+            margin: auto;
+            padding:5px;
+            font-size: 3.5vw; 
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+        }
+        #yourCheck
+        {
+            text-align: center;
+            background-color:lightblue;
+            width: 75vw;
+            height: 15%;
+            margin: auto;
+            padding: 5px;
+            font-size: 3.5vw; 
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+        }
+        #checkTotDetails
+        {
+            background-color: rgb(228, 228, 228);
+            position: relative;
+            padding: 3px;
+            font-size: 5vw;
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+            text-indent: 15px;
+        }
+        #yourCheDetails
+        {
+            background-color: rgb(228, 228, 228);
+            position: relative;
+            padding: 3px;
+            font-size: 5vw;
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+            text-indent: 10px;
+        }
+        #clear
+        {
+            background-color: rgb(168, 167, 167);
+            position:relative;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            font-size: 5vw;
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+            text-indent: 1px;
+            text-align: center; 
+        }
+        #calculate
+        {
+            background-color: lightblue;
+            position: relative;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            font-size: 5vw;
+            border:none; 
+		    border-radius:5px; 
+		    box-shadow:0px 0px 5px #666666 inset;
+            text-indent: 1px; 
+        }
+        #cTip
+        {
+            padding-right: 3px;
+        }
+        #cTotal
+        {
+            padding-right: 3px;
+        }
+        #cPerson
+        {
+            padding-right: 3px;
+        }
+        #cYPeople
+        {
+            padding-right: 3px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <section id="heading">
+            <h1>Tip Calculator</h1>
+    </section>
+    <br>
+    <section id="checkTotal">
+        <h1>Check Totals</h1>
+    </section>
+  
+    <section id= checkTotDetails>  
+        <p><div id="cTip" style="float: right">$0.00</div>Your Tip:</p>
+        <p><div id="cTotal" style="float: right">$0.00</div>Your Check Total: </p>
+        <p><div id="cPerson" style="float: right">$0.00</div>Per Person: </p>
+    </section>
+    <br>
+    <section id="yourCheck">
+        <h1>Your Check</h1>
+    </section>
+
+    <section id="yourCheDetails">
+        <p><input type="number" id="yCPeople" style="float: right; width:20vw" placeholder="1" maxlength="2">Number of People: </p>
+        <p><input type="number" id="yCCheck" style="float: right; width:20vw" placeholder="0">Pre-Tax Amount: </p>
+        <p><input type="number" id="yCTax" style="float: right; width:20vw" placeholder="0">Tax (dollar amount): </p>
+        <p><input type="number" id="yCPercentage" style="float: right; width:20vw" placeholder="15" maxlength="3">Tip Percentage: </p>
+        
+    </section>
+    <button type="button" id="calculate" onclick="calculate()" style="float: right">Calculate Tip</button>
+    <button type="button" id="clear" onclick="demolish()">Clear all inputs</button>
+
+</body>
+</html>

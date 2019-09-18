@@ -1,0 +1,32 @@
+body {
+   background-image: url("skittles.jpg");
+   background-size: cover;
+   background-color: rgb(226, 237, 255);
+   background-repeat: no-repeat;
+}
+div {
+   width: 50vw;
+   border-radius: 5px;
+   border-style: solid;
+   border-width: 1px;
+   padding: 10px;
+   margin: auto;
+   text-align: center;
+   background-color: rgb(226, 200, 255);
+}
+#output {
+   width: 63px;
+   border-radius: 5px;
+   border-style: inset;
+   border-width: 1px;
+}
+input {
+   margin: 5px;
+}
+.error {
+   width: 35vw;
+   border-style: hidden;
+   color: red;
+   font-weight: bold;
+}
+

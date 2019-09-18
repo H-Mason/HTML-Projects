@@ -1,0 +1,23 @@
+body {
+   background-image: url("map02.jpg");
+   background-size: cover;
+   background-color: rgb(69, 133, 194);
+   text-align: center;
+   padding: 5px;
+   font-family: georgia;
+}
+div {
+   margin: auto;
+   background-color: rgb(158, 187, 255);
+   border-style: solid;
+   width: 50%;
+   min-width: 222px;
+}
+hr {
+   margin: 5px;
+}
+
+table {
+   font-size: .85em;
+   margin: auto;
+}

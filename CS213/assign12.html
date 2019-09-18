@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mileage Calculator</title>
+   <link rel="stylesheet" type="text/css" href="assign12.css">
+
+<style>
+</style>
+   <script>
+      var httpRequest;
+      function validateForm() {
+         var result = false;
+         if(document.getElementById("startCity").value == "")
+         {
+            document.getElementById("sCityError").style.display = "inline";
+            document.getElementById("startCity").focus();
+         }
+         else if(document.getElementById("startState").value == "")
+         {
+            document.getElementById("sStateError").style.display = "inline";
+            document.getElementById("startState").focus();
+         }
+         else if(document.getElementById("endCity").value == "")
+         {
+            document.getElementById("eCityError").style.display = "inline";
+            document.getElementById("endCity").focus();
+         }
+         else if(document.getElementById("endState").value == "")
+         {
+            document.getElementById("eStateError").style.display = "inline";
+            document.getElementById("endState").focus();
+         }
+         else
+         {
+            var requestString = "/cgi-bin/cs213/mileageAjaxJSON" + 
+                "?startCity=" + document.getElementById("startCity").value +
+                "&startState=" + document.getElementById("startState").value +
+                "&endCity=" + document.getElementById("endCity").value +
+                "&endState=" + document.getElementById("endState").value;
+
+            makeRequest(requestString);
+            result = true;
+         }
+         return result;
+      }
+      function makeQueryString(requestString) {
+         makeRequest("/cgi-bin/cs213/mileageAjaxJSON" + requestString);
+      }
+      
+      function makeRequest(url) {
+         httpRequest = new XMLHttpRequest(); 
+         if (httpRequest != null)
+         {
+            httpRequest.onreadystatechange = handleResponse;
+            httpRequest.open("GET", url, true);
+            httpRequest.send(null);
+         }
+         else 
+         {
+            alert("Browser doesn't support XMLHttp");
+         }
+      }
+      function handleResponse() {
+         if (httpRequest.readyState == 4) {
+            if(httpRequest.status == 200) {
+               //make a new object to store the JSON string
+               var jsonObj = JSON.parse(httpRequest.responseText);
+               //check for tmode and make a string to add in
+               var tmode = "";
+               if (jsonObj.trip.tmode != undefined) {
+                  for (var i=0; i<jsonObj.trip.tmode.length; i++) {
+                     tmode += jsonObj.trip.tmode[i] + " ";
+                  }
+               }
+               //make a new var to format the JSON string, add the table head
+               var myList =
+               "<table><tr><th>Start City</th><th>Start State</th><th>End City</th>" +
+                "<th>End State</th><th>Miles</th><th>Transportation Modes</th>";
+
+               //make the rest of the table
+               myList += "<tr><td>" + jsonObj.trip.startcity + "</td><td>" +
+               jsonObj.trip.startstate + "</td><td>" +
+               jsonObj.trip.endcity + " " + "</td><td>" +
+               jsonObj.trip.endstate + "</td><td>" +
+               jsonObj.trip.miles + "</td><td>" +
+               tmode + "</td></tr>\n";
+               //close the table
+               myList += "</table><br>";
+               //put it in the span
+               document.getElementById("resultsTable").innerHTML = myList;
+            }
+            else {
+               alert('There was a problem with the request');
+               alert(httpRequest.status);
+            }
+         }
+      }
+   </script>
+</head>
+<body>
+   <div id="theTitle">
+      <h1>Mileage Calculator</h1>
+   </div>
+   <div><br>
+      <form action="" id="cityInfo">
+         Start City: <input type="text" id="startCity" name="startCity"><br>
+         <span class="error" id="sCityError" style="display:none">Please Enter A
+         Start City</span><br>
+         Start State: <input type="text" id="startState" name="startState" maxlength="2"
+            size="2"><br>
+         <span class="error" id="sStateError" style="display:none">Please Enter A
+         Start State</span><br>
+         End City: <input type="text" id="endCity" name="endCity"><br>
+         <span class="error" id="eCityError" style="display:none">Please Enter An
+         End City</span><br>
+         End State: <input type="text" id="endState" name="endCity" maxlength="2"
+            size="2"><br>
+         <span class="error" id="eStateError" style="display:none">Please Enter An
+         End State</span><br>
+         <input type="button" onclick="validateForm()" value ="Calculate Mileage">
+         <button type="reset">Clear Form</button><br>
+      </form><br>
+   </div>
+   <div id="finalResults">
+      <h2>Calculation Results:  </h2>
+      <span id="resultsTable"></span>
+   </div>
+</body>
+</html>

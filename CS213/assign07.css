@@ -1,0 +1,80 @@
+body {
+   background-color: rgb(51, 112, 135);
+   font-family: verdana;
+}
+div {
+   width: 80vw;
+   border-radius: 5px;
+   border-style: solid;
+   border-width: 1px;
+   padding: 10px;
+   margin: auto;
+   text-align: center;
+   background-color: rgb(222, 237, 242);
+}
+caption {
+   font-family: georgia;
+   padding: 3px;
+   background-color: rgb(183, 201, 232);
+   border-radius: 5px;
+   margin: auto;
+   font-weight: bold;
+   font-size: 1.25em;
+   text-shadow: .5px .5px rgb(51, 112, 135);
+}
+img {
+   max-width: 50%;
+}
+header {
+   text-align: center;
+   background-color: rgb(183, 201, 232);
+   padding: 5px;
+   border-radius: 5px;
+   margin: auto;
+   font-size: 1.25em;
+   text-shadow: 1px 1px rgb(51, 112, 135);
+   border-style: outset;
+   border-width: 1px;
+}
+footer {
+   background-color: rgb(183, 201, 232);
+   padding: 5px;
+   text-align: center;
+   font-family: georgia;
+   font-size: 1em;
+   border-radius: 5px;
+   margin: auto;
+   border-style: outset;
+   border-width: 1px;
+}
+@media screen and (min-width: 480px) {
+   .p {
+      float: left; 
+   }
+   table {
+      max-width: 65vw; 
+      text-align: center; 
+      margin: auto;
+   } 
+}
+@media screen and (min-width: 750px) {
+   table {
+      max-width: 60vw; 
+      padding: 25px;}
+   div {
+      background-image: url(babya.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+   }
+}
+@media screen and (min-width: 1000px) {
+   .p {
+      max-width: 35%;
+   }
+   caption {
+      font-size: 1.75em;
+   }
+   table {
+      max-width: 55vw; 
+      padding: 35px;}
+}

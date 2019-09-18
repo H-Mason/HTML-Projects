@@ -1,0 +1,48 @@
+body {
+   background-color: rgb(186, 190, 196);
+   text-align: center;
+   padding: 5px;
+   font-family: georgia;
+}
+header {
+   background-image: url("piano.jpg");
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+#headerDiv {
+   background-color: rgb(186, 190, 196, .85);
+   padding: 5px;
+   width: 50%;
+   min-width: 350px;
+   border-style: solid;
+   margin: auto
+}
+div {
+   margin: auto;
+   background-color: rgb(219, 217, 226);
+   padding: 5px;
+   width: 50%;
+   min-width: 400px;
+}
+.error {
+   width: 35vw;
+   border-style: hidden;
+   color: red;
+   font-weight: bold;
+}
+table {
+   margin: auto;
+   width: 50%;
+   padding: 
+   min-width: 400px;
+   font-size: .8em;
+}
+td {
+   min-width: 70px;
+   
+}
+.head {
+   font-weight: bold;
+   
+}
+

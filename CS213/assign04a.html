@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Freeze Dried Treats - Order Form</title>
+   <link rel="stylesheet" type="text/css" href="assign04.css">
+   <style>
+      #titleHeight {
+         background-color: rgb(183, 201, 232);
+         background-size: 300px;
+         background-repeat: no-repeat;
+         background-position: center;
+         border-radius: 5px;
+      }
+      #fdTitle {
+         color: rgb(34, 68, 122);
+         padding: 10px;
+         text-shadow: -1px -1px rgb(222, 232, 249);
+         text-align: center;
+         font-size: 16pt;
+      }
+      .block img {
+         float: right;
+         height: 250px;
+      }
+      header {
+         background-image: url("taffya.jpg");
+         background-size: cover;
+         border-width: 2px;
+         border-style: outset;
+      }
+      footer {
+         background-image: url("skittlesc.jpg");
+         background-size: cover;
+         border-width: 2px;
+         border-style: outset;
+      }
+      span {
+         font-size: 1.25em;
+         font-weight: bold;
+      }
+   </style>
+</head>
+<body>
+   <header style="font-family: georgia">
+      <h1>Freeze Dried Fun</h1>
+      <h2>Order Yours Today</h2>
+      <ul>
+         <li style="width:50vw"><a href="assign04.html">Home</a></li>
+      </ul>
+   </header>
+   <hr>
+   <div class="myForm" id="myForm">
+      <div id="titleHeight">
+         <h2 id="fdTitle">Order Freeze Dried Treats</h2>
+      </div> 
+      <form action="" id="fdTreatForm" name="fdTreatForm">
+         <h3>Your Name:</h3>
+         <input type="text" name="name" placeholder="John Doe" maxlength="30" 
+          width="30" style="background-color:rgb(169, 180, 198)"><br>
+         <h3>Treat:<br></h3>
+         <input type="radio" name="treat" value="skittles">Skittles<br>
+         <input type="radio" name="treat" value="taffy">Salt Water Taffy<br>
+         <input type="radio" name="treat" value="werthers">Werther's<br>
+         <input type="radio" name="treat" value="iceCream">Ice Cream<br>
+         <h3>Size:<br></h3>
+         <input type="checkbox" name="size" value="gallon">Gallon<br>
+         <input type="checkbox" name="size" value="quart">Quart<br>
+         <input type="checkbox" name="size" value="pint">Pint<br>
+         <h3>Delivery:<br></h3>
+         <select name="delivery" style="background-color:rgb(169, 180, 198)">
+            <option style="background-color:rgb(169, 180, 198)" 
+             value="Rexburg">Pickup - Rexburg</option>
+            <option style="background-color:rgb(169, 180, 198)" 
+             value="IF">Pickup - Idaho Falls</option>
+            <option style="background-color:rgb(169, 180, 198)" 
+             value="Ship">Ship</option>
+         </select><br>
+         <h3>Any special requests?<br></h3>
+         <textarea name="requests" style="background-color:rgb(169, 180, 198)"
+          placeholder="Shipping info, flavor requests, etc" ></textarea><br>
+         <input type="reset" value="Reset">
+         <input type="submit" value="Submit">
+         <br><br>
+         <img src="fdtreats.jpg" alt="fdtreats" style="width:25vw">
+      </form>
+   </div>
+   <br>
+   <div class="block" id="sample" style="height:250px; width:625px">
+      <img src="order.jpg" alt="Sample Order">
+      <p><h2>Sample Order</h2><hr>
+         <span>pint</span> of mixed ice cream<br><span>pint</span> of werther's
+         <br><span>quart</span> of mixed salt water taffy<br><span>pint</span>
+         of skittles<br><span>pint</span> of mixed small candy</p>   
+   </div>
+   <br>
+   <footer>
+      <div id="footerStuff"> 
+         Other Mason websites:<br>
+         <a href="https://www.facebook.com/heathermscraftcorner/">
+          Heather's Craft Corner</a> |
+         <a href="http://theysaymoneycantbuyhappiness.blogspot.com/">
+          Mason Baby Maybe</a>
+      </div>
+   </footer>
+
+</body>
+</html>

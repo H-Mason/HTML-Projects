@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Mortgage Calculator</title>
+   <link rel="stylesheet" type="text/css" href="mortgage.css">
+   <script>
+      function validateLoan() {
+         var loan = parseInt(document.getElementById("loan").value);
+         if (isNaN(loan)) {
+            loan = "**ERROR**: Loan amount must be filled out";
+         }
+         return loan;
+      }
+      function validateAPR() {
+         var apr = parseFloat(document.getElementById("APR").value);
+         if (apr < 0.0 || apr > 25.0) {
+            apr = "**ERROR**: APR must be between 0 and 25";
+         }
+         else if (isNaN(apr)) {
+            apr = "**ERROR**: APR must be filled out";
+         }
+         return apr;
+      }
+      function validateTerm() {
+         var term = parseInt(document.getElementById("term").value);
+         if (term < 0 || term > 40) {
+            term = "**ERROR**: Term must be between 0 and 40";
+         }
+         else if (isNaN(term)) {
+            term = "**ERROR**: Term must be filled out";
+         }
+         return term;
+      }
+      function checkInput() {
+         //reset the error message, just in case
+         resetMessage();
+         //validate all the input - will return either valid info or 
+         // the appropriate error message
+         var apr = validateAPR();
+         var term = validateTerm();
+         var p = validateLoan();
+         //if all fields are numbers, calculate payment
+         if (!isNaN(apr) && !isNaN(term) && !isNaN(p)) {
+            return true;
+         } 
+         //if an error message, go through and print it out correctly, 
+         // and put the focus on the offending box
+         else {
+            if (isNaN(apr)) {
+               document.getElementById("errorMessage").innerHTML = apr;
+               document.getElementById("APR").focus();
+            }
+            else if (isNaN(term)) {
+               document.getElementById("errorMessage").innerHTML = term;
+               document.getElementById("term").focus();
+            }
+            else {
+               document.getElementById("errorMessage").innerHTML = p;
+               document.getElementById("loan").focus();
+            } 
+            return false;
+         }
+      }
+      // on load, add event listeners for resets
+      window.onload = function(){
+         document.getElementById("mortgage").addEventListener("reset", 
+            resetStuff);
+         document.getElementById("APR").addEventListener("change", 
+            resetMessage);
+         document.getElementById("term").addEventListener("change", 
+            resetMessage);
+         document.getElementById("loan").addEventListener("change", 
+            resetMessage);
+      }
+      function resetStuff() {
+         document.getElementById("output").innerHTML = "";
+         resetMessage();
+      }
+      function resetMessage() {
+         document.getElementById("errorMessage").innerHTML = "";
+      }
+   </script>
+
+</head>
+<body>
+   <div class="myform">
+      <h1>Mortgage Calculator</h1>
+      <form action="mortgage.php" id="mortgage" method="get" 
+            onsubmit="return checkInput">
+         <fieldset>
+            <legend>Loan Info</legend>
+            APR (Annual Percentage Rate): <input type="text" id="APR" name="apr" 
+               placeholder="3.5" maxlength="5" size="5" required autofocus><br>
+            Loan Term (years): <input type="text" id="term" placeholder="30"
+               maxlength="2" size="2" name="term"required><br>
+            Loan Amount (dollar amount): <input type="text" id="loan" name="loan"
+               placeholder="150,000" size="8" required><br>
+         </fieldset><br>
+         
+         <input type="submit" id="calcButton" name="calcButton" 
+                value="Calculate Payment">
+         <button type="reset">Clear Form</button>
+      </form>
+      <div class="message" id="errorMessage"></div>
+   </div>
+   <script>
+   </script>
+</body>
+</html>

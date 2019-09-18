@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Purchase Freeze Dried Treats</title>
+   <link rel="stylesheet" type="text/css" href="assign11.css">
+   <script>
+      var items = 0;
+      var finalTotal = "";
+      function resetPhone() {
+         phone = document.getElementById("phoneError").style;
+         phone.display = "none";
+      }
+      function resetCNumber() {
+         phone = document.getElementById("cNError").style;
+         phone.display = "none";
+      }
+      function resetExp() {
+         phone = document.getElementById("expError").style;
+         phone.display = "none";
+      }
+      function resetStuff() {
+         document.getElementById("output").innerHTML = "";
+         document.getElementById("fError").style.display = "none";
+         document.getElementById("lError").style.display = "none";
+         document.getElementById("aError").style.display = "none";
+         resetPhone();
+         document.getElementById("pError").style.display = "none";
+         document.getElementById("cError").style.display = "none";
+         resetCNumber();
+         resetExp();
+      }
+      function checkPhone() {
+         //reset the error message, just in case
+         resetPhone();
+         var phone = document.getElementById("phone");
+         var check = /\d{3}-\d{3}-\d{4}/;
+         if (!check.test(phone.value)) {
+            document.getElementById("phoneError").style.display = "inline";
+            return false;
+         }
+         return true;
+      }
+      function checkCard() {
+         //reset the error message, just in case
+         resetCNumber();
+         var card = document.getElementById("number");
+         var check = /\d{16}/;
+         if (!check.test(card.value)) {
+            document.getElementById("cNError").style.display = "inline";
+            return false;
+         }
+         return true;
+      }
+      function checkExpMonth() {
+         //reset the error message, just in case
+         resetExp();
+         var month = document.getElementById("exDateMonth").value;
+         var check = /\d{2}/;
+         if (month * 1 < 1 || month * 1 > 12) {
+            document.getElementById("expError").style.display = "inline";
+            return false;
+         }
+         if (!check.test(month)) {
+            document.getElementById("expError").style.display = "inline";
+            return false;
+         }
+         return true;
+      }
+      function checkExpYear() {
+         //reset the error message, just in case
+         resetExp();
+         var year = document.getElementById("exDateYear").value;
+         var check = /\d{4}/;
+         if (!check.test(year)) {
+            document.getElementById("expError").style.display = "inline";
+            return false;
+         }
+         if (year * 1 < 2017) {
+            document.getElementById("expError").style.display = "inline";
+            return false;
+         }
+         return true;
+      }
+      //validate all input
+      function validate() {
+         var confirmationString = "Please confirm your purchase of " + finalTotal +  
+            " for " + items + " quarts of deliciousness.";
+         resetStuff();
+         var fName = document.getElementById("fName").value;
+         var lName = document.getElementById("lName").value;
+         var address = document.getElementById("address").value;
+         var cardV = document.getElementById("v").checked;
+         var cardM = document.getElementById("m").checked;
+         var cardA = document.getElementById("a").checked;
+
+         if (fName == "") {
+            document.getElementById("fError").style.display = "inline";
+            document.getElementById("fName").focus();
+            return false;
+         }
+         if (lName == "") {
+            document.getElementById("lError").style.display = "inline";
+            document.getElementById("lName").focus();
+            return false;
+         }
+         if (address == "") {
+            document.getElementById("aError").style.display = "inline";
+            document.getElementById("address").focus();
+            return false;
+         }
+         if (!checkPhone()) {
+            document.getElementById("phoneError").style.display = "inline";
+            document.getElementById("phone").focus();
+            return false;
+         }
+         if (items == 0) {
+            document.getElementById("pError").style.display = "inline";
+            document.getElementById("products").focus();
+            return false;
+         }
+         if (!cardV && !cardM && !cardA) {
+            document.getElementById("cError").style.display = "inline";
+            document.getElementById("cCType").focus();
+            return false;
+         }
+         if (!checkCard()) {
+            document.getElementById("cNError").style.display = "inline";
+            document.getElementById("number").focus();
+            return false;
+         }
+         if (!checkExpMonth()) {
+            document.getElementById("expError").style.display = "inline";
+            document.getElementById("exDateMonth").focus();
+            return false;
+         }
+         if (!checkExpYear()) {
+            document.getElementById("expError").style.display = "inline";
+            document.getElementById("exDateYear").focus();
+            return false;
+         }
+         else {
+            return true;
+         }
+      }
+      //calculate the total purchase cost
+      function calculateTotal() {
+         var total = 0;
+         var checked = 0;
+         if (document.getElementById("iceCream").checked) {
+            total += document.getElementById("iceCream").value * 1;
+            checked++;
+         }
+         if (document.getElementById("skittles").checked) {
+            total += document.getElementById("skittles").value * 1;
+            checked++;
+         }
+         if (document.getElementById("taffy").checked) {
+            total += document.getElementById("taffy").value * 1;
+            checked++;
+         }
+         if (document.getElementById("werthers").checked) {
+            total += document.getElementById("werthers").value * 1;
+            checked++;
+         }
+         finalTotal = "$" + total + ".00";
+         document.getElementById("output").innerHTML = finalTotal;
+         document.getElementById("output").value = finalTotal;
+         items = checked;
+      }
+      // on load, add event listeners
+      window.onload = function(){
+         document.getElementById("order").addEventListener("reset",
+            resetStuff);
+         document.getElementById("phone").addEventListener("blur",
+            checkPhone);
+         document.getElementById("number").addEventListener("blur",
+            checkCard);
+         document.getElementById("exDateMonth").addEventListener("blur",
+            checkExpMonth);
+         document.getElementById("exDateYear").addEventListener("blur",
+            checkExpYear);
+         document.getElementById("iceCream").addEventListener("click", 
+            calculateTotal);
+         document.getElementById("skittles").addEventListener("click",
+            calculateTotal);
+         document.getElementById("taffy").addEventListener("click",
+            calculateTotal);
+         document.getElementById("werthers").addEventListener("click",
+            calculateTotal);
+      }
+   </script>
+</head>
+<body>
+   <div class="myform">
+      <h1>Order Yummy Stuff</h1>
+      <form action="assign11.php" onsubmit="return validate()" id="order" method="get">
+         <fieldset id="customer">
+            <legend>Your Info</legend>
+            First Name <input type="text" id="fName" placeholder="John" size="12" 
+               name="fName" autofocus><span class="error" id="fError" style="display:none">
+               Please enter a first name</span><br>
+            Last Name <input type="text" id="lName" placeholder="Doe" size="12"
+               name="lName"><span class="error" id="lError" style="display:none">
+               Please enter a last name</span><br>
+            Address <input type="text" id="address" size="30" name="address"
+               placeholder="123 W Main, Rexburg, ID 83440"><span class="error" 
+               id="aError" style="display:none">Please enter an address</span><br>
+            Phone <input type="text" id="phone" size="12" maxlength="12" name="phone"
+               placeholder="xxx-xxx-xxxx"><span class="error" id="phoneError" 
+               style="display:none">Invalid phone number</span>
+         </fieldset><br>
+         <fieldset id="products">
+            <legend>Available Products</legend><span class="error" id="pError"
+               style="display:none">Please select one or more products<br></span>
+            <input type="checkbox" name="iceCream" id="iceCream" value="16">
+               Quart of Ice Cream - $16<br>
+            <input type="checkbox" name="skittles" id="skittles" value="16">
+               Quart of Skittles - $16<br>
+            <input type="checkbox" name="taffy" id="taffy" value="14">
+               Quart of Salt Water Taffy - $14<br>
+            <input type="checkbox" name="werthers" id="werthers" value="14">
+               Quart of Werther's - $14<br>
+            <h4>Your Total:</h4> <div id="output" name="output"> </div>
+         </fieldset><br>
+         <fieldset id="payment">
+            <legend>Payment Info</legend>
+            <fieldset id="cCType">
+               <legend>Card Type</legend>
+               <input type="radio" name="type" id="v" value="Visa">Visa<br>
+               <input type="radio" name="type" id="m" value="MasterCard">
+                  MasterCard<br>
+               <input type="radio" name="type" id="a" value="AmericanExpress">
+                  American Express
+            </fieldset><span class="error" id="cError" style="display:none">
+               Please select a card type</span><br>
+            Card Number<input type="text" id="number" maxlength="16" name="number" 
+               placeholder="xxxxxxxxxxxxxxxx" size="16"><span class="error" id="cNError"
+               style="display:none">Invalid Card Number</span><br>
+            Expiration Date<input type="text" id="exDateMonth" maxlength="2" size="2"
+               placeholder="mm" name="exDateMonth"><input type="text" id="exDateYear" 
+               name="exDateYear" maxlength="4" size="2" placeholder="yyyy"><span 
+               class="error" id="expError"style="display:none">Invalid Expiration Date</span> 
+         </fieldset>
+         <input type="submit" id="submitButton">
+         <button type="reset">Clear Form</button>
+      </form>
+   </div>
+</body>
+</html>

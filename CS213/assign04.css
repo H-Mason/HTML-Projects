@@ -1,0 +1,75 @@
+body {
+   background-image: url("skittles.jpg");
+   background-size: cover;
+   background-color: rgb(226, 237, 255);
+   background-repeat: no-repeat; 
+}
+header {
+   background-color: rgb(183, 201, 232);
+   text-align: center;
+   padding: 5px;
+   font-family: georgia;
+}
+footer {
+   background-color: rgb(183, 201, 232);
+   padding: 5px;
+}
+#footerStuff {
+   text-align: center;
+   font-family: georgia;
+   font-size: 13pt;
+}
+.block {
+   margin: auto;
+   padding: 10px;
+   border-style: outset;
+   background-color: rgb(183, 201, 232);
+   border-width: 2px;
+   border-color: rgb(240, 239, 239);
+   border-radius: 5px;
+   width: 65vw;
+   height: 200px;
+   font-family: ink free;
+}
+textarea {
+   width: 35vw;
+}
+.myForm {
+   width: 40vw;
+   border-radius: 5px;
+   padding: 10px;
+   margin: auto;
+   text-align: center;
+   background-color: rgb(226, 237, 255, 0.75);
+   font-family: verdana;
+}
+ul {
+   list-style-type: none;
+   margin: auto;
+   padding: 0;
+   overflow: hidden;
+   background-color: rgb(34, 68, 122);
+   width: 50vw;
+   text-align: center;
+   font-family: verdana;
+   font-size: 13pt;
+}
+
+li {
+   float: left;
+   margin: auto;
+   width: 25vw;
+}
+
+li a {
+   display: block;
+   color: white;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+}
+
+li a:hover {
+   background-color: rgb(83, 125, 193);
+   color: black;
+}

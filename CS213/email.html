@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title></title>
+   <link rel="stylesheet" type="text/css" href="">
+   <script>
+      function checkEmail() {
+         
+         return true;
+      }
+   </script>
+</head>
+<body>
+   <h2>Send An Email</h2>
+   <form id="emailForm" name="emailForm" action="email.php" method="get" 
+      onsubmit="return checkEmail()">
+      To: <br><input type="text" name="to" id="to"><br>
+      From: <br><input type="text" name="from" id="from"><br>
+      Subject: <br><input type="text" name="subject" id="subject"><br>
+      Message Body: <br><input type="textarea" name="message" id="message"><br>
+      <br><input type="submit" value="Send Email" name="send" id="send">
+   </form>
+</body>
+</html>

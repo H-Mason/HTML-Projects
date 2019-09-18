@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>AJAX test Page</title>
+   <style>
+      body {
+         background-color: lightblue;
+      }
+      header {
+         text-align: center;
+      }
+      div {
+         border-style: solid black;
+         background-color: lightgreen;
+      }
+   </style>
+   <script>
+      var httpRequest;
+      function getUrl() {
+         var theText = document.getElementById("yourUrl").value;
+         makeRequest(theText);
+      }
+      function makeRequest(url) {
+         httpRequest = false;
+         httpRequest = new XMLHttpRequest();
+         if (!httpRequest) {
+            alert('Error: Your browser does not support XML-HTTP');
+            return false;
+         }
+         else {
+            httpRequest.onreadystatechange = handleResponse;
+            httpRequest.open("GET", url, true);
+            httpRequest.send( );
+         }
+
+      }
+      function handleResponse() {
+         if (httpRequest.readyState == 4) {
+            if(httpRequest.status == 200) {
+               var myText = httpRequest.responseText;
+               document.getElementById("ajaxStuff").innerHTML = myText;
+            }
+            else {
+               alert('There was a problem with the request');
+               alert(httpRequest.status);
+            }
+         }
+      }
+      
+   </script>
+</head>
+<body>
+   <div id="ajaxStuff">
+   </div>
+   Put your URL here: <input type="text" id="yourUrl">
+   <button 
+    onclick="getUrl()">
+    Do the thing</button>
+    <button
+    onclick="makeRequest('http://157.201.194.254/~ercanbracks/studentList1.html')">
+    Do the second thing</button>
+</body>
+</html>
+

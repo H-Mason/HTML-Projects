@@ -1,0 +1,178 @@
+header {
+   background-image: url("sky.jpg");
+   background-size: cover;
+   background-repeat: no-repeat; 
+   background-color: rgb(69, 133, 194);
+   text-align: center;
+   padding: 5px;
+   font-family: georgia;
+}
+footer {
+   background-color: rgb(69, 133, 194);
+   padding: 5px;
+}
+#footerStuff {
+   text-align: center;
+//   font-family: georgia;
+   font-size: .8em;
+}
+#toTop {
+   background-color: rgb(103, 188, 255);
+   padding: 3px;
+}
+#toStudent {
+   background-color: rgb(103, 188, 255);
+   padding: 3px;
+}
+ul {
+   list-style-type: none;
+   margin: auto;
+   padding: 0;
+   overflow: hidden;
+   background-color: rgb(34, 68, 122);
+   width: 80vw;
+   text-align: center;
+   font-family: verdana;
+   font-size: 1em;
+}
+li {
+   float: left;
+   margin: auto;
+   width: 20vw;
+}
+li a {
+   display: block;
+   color: white;
+   text-align: center;
+   padding: 14px 14px;
+   text-decoration: none;
+}
+li a:hover {
+   background-color: rgb(253, 239, 82);
+   color: black;
+}
+li a.active {
+   background-color: rgb(103, 188, 255);
+   color: black;
+}
+#smallerLogo {
+   max-width: 200px;
+}
+img {
+   max-width: 400px;
+}
+.mainContent {
+   display: -webkit-flex;
+   display: flex;
+   width: 80vw;
+   flex-direction: column;
+   background-color: lightgrey;
+   margin: auto;
+}
+.heading {
+   background-color: rgb(34, 68, 122);
+   font-family: verdana;
+   font-size: 1.25em;
+   width: 77.5vw;
+   margin: auto;
+   margin-top: 15px;
+   text-align: center;
+   padding: 2px;
+   color: lightgrey;
+}
+.content {
+   display: -webkit-flex;
+   display: flex;
+   width: 80vw;
+   flex-direction: row;
+   background-color: lightgrey;
+   margin: auto;
+}
+.leftBar {
+   display: -webkit-flex;
+   display: flex;
+   width: 20vw;
+   flex-direction: column;
+   background-color: rgb(69, 133, 194);
+   margin: auto;
+   margin-top: 5px;
+   text-align: center;
+   font-family: verdana;
+   font-size: .8em;
+}
+.barPic {
+   margin: auto;
+   margin-top: 5px;
+}
+.barImg {
+   width: 17.5vw;
+}
+.otherPics {
+   display: -webkit-flex;
+   display: flex;
+   width: 55vw;
+   flex-direction: column;
+   background-color: rgb(253, 239, 82);
+   margin: auto;
+   margin-top: 5px;
+}
+.people {
+   display: -webkit-flex;
+   display: flex;
+   width: 55vw;
+   flex-direction: row;
+   background-color: rgb(253, 239, 82);
+   margin: auto;
+   margin-top: 5px;
+}
+.peoplePic {
+   text-align: center;
+   margin: auto;
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
+.peopleImg {
+   width: 25vw;
+}
+.contentFooter {
+   background-color: rgb(34, 68, 122);
+   font-family: verdana;
+   font-size: .7em;
+   width: 77.5vw;
+   margin: auto;
+   margin-top: 15px;
+   margin-bottom: 15px;
+   text-align: center;
+   padding: 2px;
+   color: lightgrey;
+}
+@media screen and (max-width: 670px) {
+   img {
+      width: 50vw;
+   }
+   ul {
+      font-size: .7em;
+   }
+   .heading {
+      font-size: .75em;
+      margin-top: 10px;
+   }
+}
+@media screen and (max-width: 1000px) {
+   .people {
+      flex-direction: column;
+   }
+   .peoplePic {
+      text-align: center;
+      margin: auto;
+      margin-top: 15px;
+      margin-bottom: 15px;
+   }
+   .peopleImg {
+      width: 50vw;
+   }
+   .heading {
+      font-size: 1em;
+      margin-top: 5px;
+   }
+}

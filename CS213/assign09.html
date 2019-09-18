@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name = “description” content = “This is a website to show how to use AJAX 
+    and JSON.” />
+   <title>Top Ten and JSON Interpreter</title>
+   <link rel="stylesheet" type="text/css" href="assign09.css">
+   <style>
+body {
+   background-color: rgb(69, 133, 194);
+   text-align: center;
+   padding: 5px;
+   font-family: georgia;
+}
+div {
+   margin: auto;
+   background-color: rgb(158, 187, 255);
+   border-style: solid;
+   width: 50%;
+   min-width: 222px;
+   padding: 5px;
+}
+hr {
+   margin: 5px;
+}
+
+#jsonStuff {
+   border-style: none;
+   font-size: .75em;
+}
+table {
+   margin: auto;
+}
+   </style>
+   <script>
+      var httpRequest;
+      //get the url from the dropdown
+      function getUrl() {
+         var theText;
+         //use the value of the dropdown to determine the txt
+         switch(document.getElementById("country").value) {
+            case "usa":
+               theText = "http://157.201.194.254/~cs213/usa.txt";
+               break;
+            case "canada":
+               theText = "http://157.201.194.254/~cs213/canada.txt";
+               break;
+            case "mexico":
+               theText = "http://157.201.194.254/~cs213/mexico.txt";
+               break;
+            case "russia":
+               theText = "http://157.201.194.254/~cs213/russia.txt";
+               break;
+            default:
+               break;
+         }
+         makeRequest(theText);
+      }
+      //Make the request for the cities
+      function makeRequest(url) {
+         httpRequest = false;
+         httpRequest = new XMLHttpRequest();
+         if (!httpRequest) {
+            alert('Error: Your browser does not support XML-HTTP');
+            return false;
+         }
+         else {
+            httpRequest.onreadystatechange = handleResponse;
+            httpRequest.open("GET", url, true);
+            httpRequest.send( );
+         }
+      }
+      //handle the response from the cities
+      function handleResponse() {
+         if (httpRequest.readyState == 4) {
+            if(httpRequest.status == 200) {
+               var myText = httpRequest.responseText;
+               document.getElementById("ajaxStuff").innerHTML = 
+               "City:		   Population:\n<hr>" + myText;
+            }
+            else {
+               alert('There was a problem with the request');
+               alert(httpRequest.status);
+            }
+         }
+      }
+      //get the url from the user input
+      function getUrlTwo() {
+         var theText = "http://157.201.194.254/~cs213/";
+         theText += document.getElementById("yourUrl").value;
+         makeRequestTwo(theText);
+      }
+      //make the request for the JSON file
+      function makeRequestTwo(url) {
+         httpRequest = false;
+         httpRequest = new XMLHttpRequest();
+         if (!httpRequest) {
+            alert('Error: Your browser does not support XML-HTTP');
+            return false;
+         }
+         else {
+            httpRequest.onreadystatechange = handleResponseTwo;
+            httpRequest.open("GET", url, true);
+            httpRequest.send( );
+         }
+      }
+      //handle the response for the JSON file
+      function handleResponseTwo() {
+         if (httpRequest.readyState == 4) {
+            if(httpRequest.status == 200) {
+               //make a new object to store the JSON string
+               var jsonObj = JSON.parse(httpRequest.responseText);
+               //make a new var to format the JSON string, add the table head
+               var myList = 
+               "<table><tr><th>Name</th><th>Address</th><th>Major</th><th>GPA</th>";
+
+               //loop through the object to make the rest of the table
+               for (var i=0; i < jsonObj.students.length; i++) {
+                  myList += "<tr><td>" + jsonObj.students[i].first + " " + 
+                  jsonObj.students[i].last + "</td><td>" + 
+                  jsonObj.students[i].address.city + ", " +
+                  jsonObj.students[i].address.state + " " + 
+                  jsonObj.students[i].address.zip + "</td><td>" + 
+                  jsonObj.students[i].major + "</td><td>" + 
+                  jsonObj.students[i].gpa + "</td></tr>\n";
+               }
+               //close the table
+               myList += "</table>";
+               //put it in the span
+               document.getElementById("jsonStuff").innerHTML = myList;
+            }
+            else {
+               alert('There was a problem with the request');
+               alert(httpRequest.status);
+            }
+         }
+      }
+   </script>
+</head>
+<body>
+   <div id="partOne">
+      <h3>Select a country to view the top ten cities & populations</h3>
+      <select name="country" id="country">
+         <option value="usa">USA</option>
+         <option value="canada">Canada</option>
+         <option value="mexico">Mexico</option>
+         <option value="russia">Russia</option>
+      </select>
+       <button onclick="getUrl()">View Cities</button>
+      <pre id="ajaxStuff">
+      </pre>
+   </div>
+   <br>
+   <div id="partTwo">
+      <h3>Pull a list of students from a file</h3>
+      Filename: <input type="text" id="yourUrl" value="json.txt">
+      <button onclick="getUrlTwo()">Pull JSON</button>
+      <br><br>
+      <span id="jsonStuff">
+      </span>
+      <br>
+   </div>
+</body>
+</html>
+

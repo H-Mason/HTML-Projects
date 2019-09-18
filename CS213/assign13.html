@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Piano Festival Registration</title>
+   <link rel="stylesheet" type="text/css" href="assign13.css">
+   <script>
+      var first;
+      var first2;
+      var last;
+      var last2;
+      var id;
+      var id2;
+      var skill;
+      var instrument;
+      var type;
+      var building;
+      var room;
+      var time;
+      //function to check input
+      function checkInput() {
+         resetErrors();
+         first = document.getElementById("first").value;
+         last = document.getElementById("last").value;
+         id = document.getElementById("id").value;
+         first2 = document.getElementById("first2").value;
+         last2 = document.getElementById("last2").value;
+         id2 = document.getElementById("id2").value;
+         skill = document.getElementById("skill").value;
+         instrument = document.getElementById("instrument").value;
+         //type = document.getElementById("type").value;
+         getType();
+         building = document.getElementById("building").value;
+         room = document.getElementById("room").value;
+         time = document.getElementById("time").value;
+         //make sure all input fields are filled in
+         if (type == "") {
+            document.getElementById("tError").style.display = "inline";
+            document.getElementById("type").focus();
+            return false;
+         }
+         if (first == "") {
+            document.getElementById("fError").style.display = "inline";
+            document.getElementById("first").focus();
+            return false;
+         }
+         if (last == "") {
+            document.getElementById("lError").style.display = "inline";
+            document.getElementById("last").focus();
+            return false;
+         }
+         if (id == "") {
+            document.getElementById("iDError").style.display = "inline";
+            document.getElementById("id").focus();
+            return false;
+         }
+         if (first2 == "" && type == "Duet") {
+            document.getElementById("f2Error").style.display = "inline";
+            document.getElementById("first2").focus();
+            return false;
+         }
+         if (last2 == "" && type == "Duet") {
+            document.getElementById("l2Error").style.display = "inline";
+            document.getElementById("last2").focus();
+            return false;
+         }
+         if (id2 == "" && type == "Duet") {
+            document.getElementById("iD2Error").style.display = "inline";
+            document.getElementById("id2").focus();
+            return false;
+         }
+         if (skill == "") {
+            document.getElementById("skillError").style.display = "inline";
+            document.getElementById("skill").focus();
+            return false;
+         }
+         if (instrument == "") {
+            document.getElementById("instError").style.display = "inline";
+            document.getElementById("instrument").focus();
+            return false;
+         }
+         if (building == "") {
+            document.getElementById("buildError").style.display = "inline";
+            document.getElementById("building").focus();
+            return false;
+         }
+         if (room == "") {
+            document.getElementById("roomError").style.display = "inline";
+            document.getElementById("room").focus();
+            return false;
+         }
+         if (time == "") {
+            document.getElementById("timeError").style.display = "inline";
+            document.getElementById("time").focus();
+            return false;
+         }
+         return true;
+      }
+      function resetErrors() {
+         document.getElementById("fError").style.display = "none";
+         document.getElementById("lError").style.display = "none";
+         document.getElementById("iDError").style.display = "none";
+         document.getElementById("f2Error").style.display = "none";
+         document.getElementById("l2Error").style.display = "none";
+         document.getElementById("iD2Error").style.display = "none";
+         document.getElementById("skillError").style.display = "none";
+         document.getElementById("instError").style.display = "none";
+         document.getElementById("tError").style.display = "none";
+         document.getElementById("buildError").style.display = "none";
+         document.getElementById("roomError").style.display = "none";
+         document.getElementById("timeError").style.display = "none";
+      }
+      function checkDuet() {
+         resetErrors();
+         if (document.getElementById("duet").checked) {
+            document.getElementById("secondStudent").style.display = "inline";
+         }
+         else {
+            document.getElementById("secondStudent").style.display = "none";
+         }
+      }
+      function getType() {
+         if (document.getElementById("solo").checked) {
+            type = "Solo";
+         }
+         else if (document.getElementById("duet").checked) {
+            type = "Duet";
+         }
+         else if (document.getElementById("concerto").checked) {
+            type = "Concerto";
+         }
+         else {
+            type = "";
+         }
+      }
+      //
+      function registerStudent() {
+         var check = checkInput();
+         if (check == false) {
+            return false;
+         }
+         var queryString = makeQueryString();
+         makeRequest(queryString);
+      }
+      function makeQueryString() {
+         var queryString = "assign13.php?type=" + type +
+             "&first=" + first + "&last=" + last +
+             "&id=" + id + "&skill=" + skill +
+             "&instrument=" + instrument + "&building=" + building +
+             "&room=" + room + "&time=" + time + "&first2=" + first2 + 
+	     "&last2=" + last2 +"&id2=" + id2;
+
+         return queryString;
+      }
+      function makeRequest(url) {
+         httpRequest = new XMLHttpRequest();
+         if (httpRequest != null)
+         {
+            httpRequest.onreadystatechange = handleResponse;
+            httpRequest.open("GET", url, true);
+            httpRequest.send(null);
+            document.getElementById("input").reset();
+            checkDuet();
+         }
+         else
+         {
+            alert("Browser doesn't support XMLHttp");
+         }
+      }
+      function handleResponse() {
+         if (httpRequest.readyState == 4) {
+            if(httpRequest.status == 200) {
+               var registeredText = httpRequest.responseText;
+               document.getElementById("displayDiv").innerHTML = registeredText;
+            }
+            else {
+               alert('There was a problem with the request');
+               alert(httpRequest.status);
+            }
+         }
+      }
+      //stuff to do on load
+      window.onload = function() {
+         document.getElementById("solo").addEventListener("click", checkDuet);
+         document.getElementById("duet").addEventListener("click", checkDuet);
+         document.getElementById("concerto").addEventListener("click", checkDuet);
+         //read in the data in the file
+         makeRequest("assign13.php");
+      }
+   </script>
+</head>
+<body>
+   <header>
+      <div id="headerDiv"><h1>BYUI Piano Festival</h1></div>
+   </header>
+   <br>
+   <div id="inputSection">
+      <form id="input">
+         <h3>Performance Type</h3>
+         <fieldset id="type">
+            <input type="radio" name="type" id="solo" value="Solo">Solo
+            <input type="radio" name="type" id="duet" value="Duet">Duet
+            <input type="radio" name="type" id="concerto" value="Concerto">Concerto<br>
+         </fieldset>
+         </select><br>
+         <span class="error" id="tError" style="display:none">
+            Please select a performance type<br>
+         </span>
+         <h3>Student Info: </h3>
+         <input type="text" name="first" id="first" placeholder="First Name">
+         <span class="error" id="fError" style="display:none">
+            Please enter a first name<br>
+         </span>
+         <input type="text" name="last" id="last" placeholder="Last Name">
+         <span class="error" id="lError" style="display:none">
+            Please enter a last name<br>
+         </span>
+         <input type="text" name="id" id="id" placeholder="Student ID"><br>
+         <span class="error" id="iDError" style="display:none">
+            Please enter a student ID<br>
+         </span>
+         <span name="secondStudent" id="secondStudent" style="display:none">
+            <input type="text" name="first2" id="first2" 
+               placeholder="Second First Name">
+            <span class="error" id="f2Error" style="display:none">
+               Please enter a first name<br>
+            </span>
+            <input type="text" name="last2" id="last2"
+               placeholder="Second Last Name">
+            <span class="error" id="l2Error" style="display:none">
+               Please enter a last name<br>
+            </span>
+            <input type="text" name="id2" id="id2"
+               placeholder="Second Student ID"><br>
+            <span class="error" id="iD2Error" style="display:none">
+               Please enter a student ID<br>
+            </span>
+         </span>
+         <h3>Skill Level: </h3>
+         <select name="skill" id="skill">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Pre-Advanced">Pre-Advanced</option>
+            <option value="Advanced">Advanced</option>
+         </select><br>
+         <span class="error" id="skillError" style="display:none">
+            Please select a skill level<br>
+         </span>
+         <h3>Instrument: </h3>
+         <select name="instrument" id="instrument">
+            <option value="Piano">Piano</option>
+            <option value="Voice">Voice</option>
+            <option value="String">String</option>
+            <option value="Organ">Organ</option>
+            <option value="Other">Other</option>
+         </select><br>
+         <span class="error" id="instError" style="display:none">
+            Please select an instrument<br>
+         </span>
+         <h3>Location: </h3>
+         <select id="building" id="building">
+            <option value="Austin">Austin</option>
+            <option value="I Center">I Center</option>
+            <option value="Benson">Benson</option>
+            <option value="Clarke">Clarke</option>
+            <option value="Hinckley">Hinckley</option>
+            <option value="Hart">Hart</option>
+            <option value="Kimball">Kimball</option>
+            <option value="Manwaring Center">Manwaring Center</option>
+            <option value="Ricks">Ricks</option>
+            <option value="Romney">Romney</option>
+            <option value="Smith">Smith</option>
+            <option value="Snow">Snow</option>
+            <option value="STC">STC</option>
+            <option value="Taylor">Taylor</option>
+         </select><br>
+         <span class="error" id="buildError" style="display:none">
+            Please select a building<br>
+         </span>
+         <h3>Room Number: </h3>
+         <input type="text" name="room" id="room" placeholder="234"><br>
+         <span class="error" id="roomError" style="display:none">
+            Please enter a room<br>
+         </span>
+         <h3>Time Slot: </h3>
+         <select id = "time" name="time">	
+            <option value ="8:00">8:00 a.m.</option>
+            <option value ="8:15">8:15 a.m.</option>
+            <option value ="8:30">8:30 a.m.</option>
+            <option value ="8:45">8:45 a.m.</option>
+            <option value ="9:00">9:00 a.m.</option>
+            <option value ="9:15">9:15 a.m.</option>
+            <option value ="9:30">9:30 a.m.</option>
+            <option value ="9:45">9:45 a.m.</option>
+            <option value ="10:00">10:00 a.m.</option>
+            <option value ="10:15">10:15 a.m.</option>
+            <option value ="10:30">10:30 a.m.</option>
+            <option value ="10:45">10:45 a.m.</option>
+            <option value ="11:00">11:00 a.m.</option>
+            <option value ="11:15">11:15 a.m.</option>
+            <option value ="11:30">11:30 a.m.</option>
+            <option value ="11:45">11:45 a.m.</option>
+            <option value ="12:00">12:00 p.m.</option>
+            <option value ="12:15">12:15 p.m.</option>
+            <option value ="12:30">12:30 p.m.</option>
+            <option value ="12:45">12:45 p.m.</option>
+            <option value ="1:00">1:00 p.m.</option>
+            <option value ="1:15">1:15 p.m.</option>
+            <option value ="1:30">1:30 p.m.</option>
+            <option value ="1:45">1:45 p.m.</option>
+            <option value ="2:00">2:00 p.m.</option>
+            <option value ="2:15">2:15 p.m.</option>
+            <option value ="2:30">2:30 p.m.</option>
+            <option value ="2:45">2:45 p.m.</option>
+            <option value ="3:00">3:00 p.m.</option>
+            <option value ="3:15">3:15 p.m.</option>
+            <option value ="3:30">3:30 p.m.</option>
+            <option value ="3:45">3:45 p.m.</option>
+            <option value ="4:00">4:00 p.m.</option>
+            <option value ="4:15">4:15 p.m.</option>
+            <option value ="4:30">4:30 p.m.</option>
+            <option value ="4:45">4:45 p.m.</option>
+         </select><br>
+         <span class="error" id="timeError" style="display:none">
+            Please select a time<br>
+         </span><br>
+         <input type="reset" value="Clear Form">
+         <input type="button" id="register" name="register" onclick="registerStudent()" 
+            value="Register Student">
+      </form><br>
+   </div><br>
+   <div id="displayHeader">
+      <h2>Registered Students</h2>
+   </div>
+   <div id="displayDiv">
+   </div>
+</body>
+</html>
